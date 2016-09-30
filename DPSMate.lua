@@ -405,6 +405,7 @@ function DPSMate:SetStatusBarValue()
 			_G("DPSMate_"..c["name"].."_ScrollFrame_Child_Total_Value"):SetText(strt[1]..strt[2])
 		end
 		if (user[1]) then
+			_G("DPSMate_"..c["name"].."_ScrollFrame_Child_Total"):Show()
 			for i=1, 40 do
 				--DPSMate:SendMessage("Test 1")
 				if (not user[i]) then break end -- To prevent visual issues
@@ -423,6 +424,8 @@ function DPSMate:SetStatusBarValue()
 				statusbar.user = user[i]
 				statusbar:Show()
 			end
+		else
+			_G("DPSMate_"..c["name"].."_ScrollFrame_Child_Total"):Hide()
 		end
 	end
 end

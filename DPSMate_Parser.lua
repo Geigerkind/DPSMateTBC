@@ -901,7 +901,7 @@ function DPSMate.Parser:SpellHeal(timestamp, eventtype, srcGUID, srcName, srcFla
 	end
 	srcGUID, srcName, spellName = DB:GetGuardianOwnerByGUID(srcGUID, srcName, spellName)
 	if not DPSMate:IsNPC(srcGUID, srcName) then
-		if critical then t[1]=0;t[2]=critical end
+		if critical then t[1]=0;t[2]=1 end
 		if eventtype == "SPELL_PERIODIC_HEAL" then
 			spellName = spellName..DPSMate.L["periodic"]
 		end
