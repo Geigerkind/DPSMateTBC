@@ -1885,7 +1885,6 @@ function DPSMate.DB:Attempt(mode, check, tar)
 					tinsert(DPSMateAttempts[zone][1][6], {DPSMateCombatTime["total"], tar or DPSMate.L["unknown"]})
 				end
 			else
-				DPSMate:SendMessage("Fired!")
 				tinsert(DPSMateAttempts[zone], 1, {
 					[1] = DPSMate.L["unknown"],
 					[2] = DPSMateCombatTime["total"],
