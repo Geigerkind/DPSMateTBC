@@ -1,6 +1,6 @@
 -- Global Variables
 DPSMate = {}
-DPSMate.VERSION = 23
+DPSMate.VERSION = 24
 DPSMate.LOCALE = GetLocale()
 DPSMate.SYNCVERSION = DPSMate.VERSION..DPSMate.LOCALE
 DPSMate.Parser = {}
@@ -521,7 +521,7 @@ function DPSMate:GetMode(k)
 				if DPSMateHistory[Handler.Hist][num] then
 					return DPSMateHistory[Handler.Hist][num], DPSMateCombatTime["segments"][num][1], DPSMateCombatTime["segments"][num][2]
 				else
-					return result[cat][1], result[cat][2], result[cat][3]
+					return {}, 0, 0
 				end
 			else
 				return result[cat][1], result[cat][2], result[cat][3]
@@ -539,7 +539,7 @@ function DPSMate:GetModeByArr(arr, k, Hist)
 				if DPSMateHistory[Hist or arr.Hist][num] then
 					return DPSMateHistory[Hist or arr.Hist][num], DPSMateCombatTime["segments"][num][1], DPSMateCombatTime["segments"][num][2]
 				else
-					return result[cat][1], result[cat][2], result[cat][3]
+					return {}, 0, 0
 				end
 			else
 				return result[cat][1], result[cat][2], result[cat][3]

@@ -517,6 +517,7 @@ function DPSMate.Options:InitializeConfigMenu()
 		_G("DPSMate_ConfigMenu_Tab_Columns_Child_Casts_Check"..i):SetChecked(DPSMateSettings["columnscasts"][i])
 		_G("DPSMate_ConfigMenu_Tab_Columns_Child_Fails_Check"..i):SetChecked(DPSMateSettings["columnsfails"][i])
 		_G("DPSMate_ConfigMenu_Tab_Columns_Child_CCBreaker_Check"..i):SetChecked(DPSMateSettings["columnsccbreaker"][i])
+		_G("DPSMate_ConfigMenu_Tab_Columns_Child_Rezz_Check"..i):SetChecked(DPSMateSettings["columnsrezz"][i])
 	end
 	
 	-- Tab Tooltips
@@ -771,6 +772,7 @@ function DPSMate.Options:PopUpAccept(bool, bypass)
 			--DPSMateThreat = {[1]={},[2]={}}
 			DPSMateFails = {[1]={},[2]={}}
 			DPSMateCCBreaker = {[1]={},[2]={}}
+			DPSMateRezz = {[1]={},[2]={}}
 			DPSMateHistory = {
 				names = {},
 				DMGDone = {},
@@ -790,7 +792,8 @@ function DPSMate.Options:PopUpAccept(bool, bypass)
 				Auras = {},
 				--Threat = {},
 				Fails = {},
-				CCBreaker = {}
+				CCBreaker = {},
+				Rezz = {}
 			}
 			DPSMateCombatTime = {
 				total = 1,
@@ -846,6 +849,7 @@ function DPSMate.Options:PopUpAccept(bool, bypass)
 			--DPSMateThreat[2] = {}
 			DPSMateFails[2] = {}
 			DPSMateCCBreaker[2] = {}
+			DPSMateRezz[2] = {}
 			DPSMateCombatTime["current"] = 1
 		end
 		DPSMate.Modules.DPS.DB = DPSMateDamageDone
@@ -889,6 +893,8 @@ function DPSMate.Options:PopUpAccept(bool, bypass)
 		DPSMate.Modules.CCBreaker.DB = DPSMateCCBreaker
 		DPSMate.Modules.OHPS.DB = DPSMateOverhealing
 		DPSMate.Modules.OHealingTaken.DB = DPSMateOverhealingTaken
+		DPSMate.Modules.Rezz.DB = DPSMateRezz
+		DPSMate.Modules.Activity.DB = DPSMateCombatTime
 		for _, val in pairs(DPSMateSettings["windows"]) do
 			if not val["options"][2]["total"] and not val["options"][2]["currentfight"] then
 				val["options"][2]["total"] = true

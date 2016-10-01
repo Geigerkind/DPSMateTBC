@@ -503,4 +503,8 @@ if (GetLocale() == "deDE") then
 	DPSMate.L["columnstooltip"] = "Aktiviere das, um diese Extrainformation in diesem Modus zu zeigen."
 	DPSMate.L["commas"] = "Komma"
 	DPSMate.L["versionisold"] = "Deine DPSMate-Version ist veraltet. Update besser mal. DPSMate synchronisiert nur aktuellen Versionen."
+	DPSMate.L["rezz"] = "Wiederbelebungen"
+	DPSMate.L["rezzof"] = "Wiederbelebungen von "
+	DPSMate.L["rezzsum"] = "Wiederbelebungs Übersicht"
+	DPSMate.L["activity"] = "Aktivität"
 end

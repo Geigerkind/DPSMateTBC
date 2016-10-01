@@ -429,7 +429,8 @@ function DPSMate.DB:OnEvent(event)
 				Auras = {},
 				--Threat = {},
 				Fail = {},
-				CCBreaker = {}
+				CCBreaker = {},
+				Rezz = {}
 			}
 		end
 		if DPSMateUser == nil then DPSMateUser = {} end
@@ -452,6 +453,7 @@ function DPSMate.DB:OnEvent(event)
 		--if DPSMateThreat == nil then DPSMateThreat = {[1]={},[2]={}} end
 		if DPSMateFails == nil then DPSMateFails = {[1]={},[2]={}} end
 		if DPSMateCCBreaker == nil then DPSMateCCBreaker = {[1]={},[2]={}} end
+		if DPSMateRezz == nil then DPSMateRezz = {[1]={},[2]={}} end
 		-- Legacy Logs support
 		if DPSMateAttempts == nil then DPSMateAttempts = {} end
 		if DPSMatePlayer == nil then DPSMatePlayer = {} end
@@ -499,6 +501,8 @@ function DPSMate.DB:OnEvent(event)
 		DPSMate.Modules.CCBreaker.DB = DPSMateCCBreaker
 		DPSMate.Modules.OHPS.DB = DPSMateOverhealing
 		DPSMate.Modules.OHealingTaken.DB = DPSMateOverhealingTaken
+		DPSMate.Modules.Rezz.DB = DPSMateRezz
+		DPSMate.Modules.Activity.DB = DPSMateCombatTime
 		
 		if DPSMateCombatTime == nil then
 			DPSMateCombatTime = {
@@ -509,6 +513,13 @@ function DPSMate.DB:OnEvent(event)
 					[1] = {},
 					[2] = {}
 				},
+			}
+		end
+		
+		if not DPSMateSettings["columnsrezz"] then
+			DPSMateSettings["columnsrezz"] = {
+				[1] = true,
+				[2] = true,
 			}
 		end
 		
@@ -834,7 +845,7 @@ function DPSMate.DB:IsWindFuryAttack(arr, Dname, Duser, bool)
 	local time = GetTime()
 	for c,v in pairs(arr) do
 		if v then
-			if (time-c)<=0.005 then
+			if (time-c)<=0.0005 then
 				if bool then
 					self:BuildBuffs(Duser, Duser, WFAttack, true)
 					self:DestroyBuffs(Duser, WFAttack)
