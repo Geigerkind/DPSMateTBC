@@ -746,8 +746,8 @@ function DPSMate.DB:BuildAbility(name, kind, school, sid, buffOrDebuff)
 	if not DPSMateAbility[name] then
 		DPSMateAbility[name] = {
 			[1] = DPSMate:TableLength(DPSMateAbility)+101,
-			[2] = kind or "",
-			[3] = school or "",
+			[2] = kind or "None",
+			[3] = school or "None",
 			[4] = sid or 0,
 			[5] = buffOrDebuff or false,
 		}
@@ -830,7 +830,7 @@ function DPSMate.DB:AddSpellSchool(ab, sc, sid, bod)
 		DPSMateAbility[ab][4] = sid or DPSMateAbility[ab][4]
 		DPSMateAbility[ab][5] = bod or DPSMateAbility[ab][5]
 	else
-		self:BuildAbility(ab,nil,sc,sid)
+		self:BuildAbility(ab,"None",sc,sid)
 	end
 end
 
@@ -2138,9 +2138,17 @@ function DPSMate.DB:AssignGuardianToOwner(guardianGUID, guardianName)
 	end
 end
 
+local guardList = {
+	["Minion"] = true,
+	["Guardian"] = true,
+	["Wächter"] = true,
+	["Diener"] = true,
+	["Begleiter"] = true,
+	["Pet"] = true,
+}
 function DPSMate.DB:GetMinionOwner(name, spellName)
-	local nName = name:match(DPSMate.L["minionregex"]) -- Gotta test that on the german client
-	if nName then
+	local nName, guard = name:match(DPSMate.L["minionregex"]) -- Gotta test that on the german client
+	if nName and guardList[guard] then
 		return nName, spellName..DPSMate.L["minion"]
 	end
 	return name, spellName
