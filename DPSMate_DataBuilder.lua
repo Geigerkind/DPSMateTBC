@@ -408,6 +408,7 @@ function DPSMate.DB:OnEvent(event)
 				bcfail = false,
 				bcrw = false,
 				targetscale=0.58,
+				hideonlogin = false,
 			}
 		end
 		if DPSMateHistory == nil then 
