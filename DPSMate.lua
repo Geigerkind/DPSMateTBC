@@ -1,6 +1,6 @@
 -- Global Variables
 DPSMate = {}
-DPSMate.VERSION = 31
+DPSMate.VERSION = 32
 DPSMate.LOCALE = GetLocale()
 DPSMate.SYNCVERSION = DPSMate.VERSION..DPSMate.LOCALE
 DPSMate.Parser = {}
@@ -115,6 +115,7 @@ function DPSMate:InitializeFrames()
 			f.Key=k
 		end
 		local frame = _G("DPSMate_"..val["name"])
+		DPSMateSettings["windows"][k]["hidden"] = false
 		frame.fborder = _G("DPSMate_"..val["name"].."_Border")
 		
 		frame.fborder:SetAlpha(val["borderopacity"] or 0)
