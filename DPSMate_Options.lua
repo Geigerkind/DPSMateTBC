@@ -1442,7 +1442,11 @@ function DPSMate.Options:Report()
 	SendChatMessage(DPSMate.L["name"].." - "..DPSMate.L["reportfor"]..DPSMate:GetModeName(DPSMate_Report.PaKey or 1).." - ".._G("DPSMate_"..DPSMateSettings["windows"][DPSMate_Report.PaKey or 1]["name"].."_Head_Font"):GetText().." - "..b[1]..b[2], chn, nil, index)
 	for i=1, DPSMate_Report_Lines:GetValue() do
 		if (not value[i] or value[i] == 0) then break end
-		SendChatMessage(i..". "..name[i].." -"..value[i], chn, nil, index)
+		if DPSMateSettings["reportdelay"] then
+			tinsert(DPSMate.DelayMsg, {i..". "..name[i].." -"..value[i], chn, index})
+		else
+			SendChatMessage(i..". "..name[i].." -"..value[i], chn, nil, index)
+		end
 	end
 	DPSMate_Report:Hide()
 end
@@ -1481,18 +1485,38 @@ function DPSMate.Options:ReportUserDetails(obj, channel, name)
 			local type = " (HIT)"
 			if c[i][3]==1 then type=" (CRIT)" elseif c[i][3]==2 then type=" (CRUSH)" end
 			if c[i][2]==1 then
-				SendChatMessage(i..". |cFF8cff80"..DPSMate:GetAbilityById(a[i]).." => ".."+"..c[i][1]..type.."|r", chn, nil, index)
+				if DPSMateSettings["reportdelay"] then
+					tinsert(DPSMate.DelayMsg, {i..". |cFF8cff80"..DPSMate:GetAbilityById(a[i]).." => ".."+"..c[i][1]..type.."|r", chn, index})
+				else
+					SendChatMessage(i..". |cFF8cff80"..DPSMate:GetAbilityById(a[i]).." => ".."+"..c[i][1]..type.."|r", chn, nil, index)
+				end
 			else
-				SendChatMessage(i..". |cFFFF8080"..DPSMate:GetAbilityById(a[i]).." => ".."-"..c[i][1]..type.."|r", chn, nil, index)
+				if DPSMateSettings["reportdelay"] then
+					tinsert(DPSMate.DelayMsg, {i..". |cFFFF8080"..DPSMate:GetAbilityById(a[i]).." => ".."-"..c[i][1]..type.."|r", chn, index})
+				else
+					SendChatMessage(i..". |cFFFF8080"..DPSMate:GetAbilityById(a[i]).." => ".."-"..c[i][1]..type.."|r", chn, nil, index)
+				end
 			end
 		else
 			if DPSMateSettings["windows"][Key]["CurMode"] == "fails" then
-				SendChatMessage(i..". "..DPSMate.Modules.Fails:Type(a[i]).." - "..p, chn, nil, index)
+				if DPSMateSettings["reportdelay"] then
+					tinsert(DPSMate.DelayMsg, {i..". "..DPSMate.Modules.Fails:Type(a[i]).." - "..p, chn, index})
+				else
+					SendChatMessage(i..". "..DPSMate.Modules.Fails:Type(a[i]).." - "..p, chn, nil, index)
+				end
 			else
 				if DPSMate:TContains(AbilityModes, DPSMateSettings["windows"][Key]["CurMode"]) then
-					SendChatMessage(i..". "..DPSMate:GetAbilityById(a[i]).." - "..p, chn, nil, index)
+					if DPSMateSettings["reportdelay"] then
+						tinsert(DPSMate.DelayMsg, {i..". "..DPSMate:GetAbilityById(a[i]).." - "..p, chn, index})
+					else
+						SendChatMessage(i..". "..DPSMate:GetAbilityById(a[i]).." - "..p, chn, nil, index)
+					end
 				else
-					SendChatMessage(i..". "..DPSMate:GetUserById(a[i]).." - "..p, chn, nil, index)
+					if DPSMateSettings["reportdelay"] then
+						tinsert(DPSMate.DelayMsg, {i..". "..DPSMate:GetUserById(a[i]).." - "..p, chn, index})
+					else
+						SendChatMessage(i..". "..DPSMate:GetUserById(a[i]).." - "..p, chn, nil, index)
+					end
 				end
 			end
 		end
