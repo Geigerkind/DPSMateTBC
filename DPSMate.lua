@@ -19,6 +19,7 @@ DPSMate.ModuleNames = {}
 DPSMate.BabbleBoss = AceLibrary("DPSBabble-Boss-2.3")
 DPSMate.UserId = nil
 DPSMate.AbilityId = nil
+DPSMate.Key = 1
 DPSMate.DelayMsg = {}
 
 -- Local Variables
