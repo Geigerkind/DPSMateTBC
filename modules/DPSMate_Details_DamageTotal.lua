@@ -337,7 +337,7 @@ function DPSMate.Modules.DetailsDamageTotal:SortLineTable(uid)
 		end
 	end
 	-- Pet
-	if DPSMateUser[user][5] and DPSMateUser[DPSMateUser[user][5]] and DPSMateSettings["mergepets"] then
+	if DPSMateUser[user][5] and DPSMateUser[DPSMateUser[user][5]] and DPSMateSettings["mergepets"] and DPSMateUser[user][5]~=user then
 		if db[DPSMateUser[DPSMateUser[user][5]][1]] then
 			for cat, val in pairs(db[DPSMateUser[DPSMateUser[user][5]][1]]) do
 				if cat~="i" and val["i"] then
