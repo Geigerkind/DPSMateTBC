@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFOverhealing taken|r
 ## Notes: Adds the modules for the overhealing taken evaluation.
 ## Author: Shino <Synced> - Kronos

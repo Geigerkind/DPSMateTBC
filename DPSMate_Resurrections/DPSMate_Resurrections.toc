@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFResurrections|r
 ## Notes: Adds the modules for the resurrections evaluation.
 ## Author: Shino <Synced> - Kronos

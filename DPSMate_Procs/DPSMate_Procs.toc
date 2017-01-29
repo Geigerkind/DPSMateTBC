@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFProcs|r
 ## Notes: Adds the modules for the proc evaluation.
 ## Author: Shino <Synced> - Kronos

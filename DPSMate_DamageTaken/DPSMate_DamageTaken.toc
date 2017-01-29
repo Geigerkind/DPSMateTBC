@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFDamage taken|r
 ## Notes: Adds the modules for damage taken evaluation.
 ## Author: Shino <Synced> - Kronos

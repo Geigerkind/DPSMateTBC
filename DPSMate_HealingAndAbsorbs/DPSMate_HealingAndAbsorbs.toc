@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFHealing and Absorbs|r
 ## Notes: Adds the modules for the healing and absorbs evaluation.
 ## Author: Shino <Synced> - Kronos

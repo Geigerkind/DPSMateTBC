@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFCure disease received|r
 ## Notes: Adds the modules for cure disease received evaluation.
 ## Author: Shino <Synced> - Kronos

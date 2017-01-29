@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFRaw healing taken|r
 ## Notes: Adds the modules for the raw healing taken evaluation.
 ## Author: Shino <Synced> - Kronos

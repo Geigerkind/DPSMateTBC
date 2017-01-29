@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFDecurses received|r
 ## Notes: Adds the modules for decurses received evaluation.
 ## Author: Shino <Synced> - Kronos

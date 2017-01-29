@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFLift magic received|r
 ## Notes: Adds the modules for lift magic received evaluation.
 ## Author: Shino <Synced> - Kronos

@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFEffective healing|r
 ## Notes: Adds the modules for the effective healing evaluation.
 ## Author: Shino <Synced> - Kronos

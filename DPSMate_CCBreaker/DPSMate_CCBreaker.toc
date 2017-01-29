@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFCCBreaker|r
 ## Notes: Adds the CCBreaker module.
 ## Author: Shino <Synced> - Kronos

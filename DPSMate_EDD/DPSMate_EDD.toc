@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFEnemy Damage Done|r
 ## Notes: Adds the modules for the edd evaluation.
 ## Author: Shino <Synced> - Kronos

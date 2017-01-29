@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFFriendly Fire Taken|r
 ## Notes: Adds the modules for the friendly fire taken evaluation.
 ## Author: Shino <Synced> - Kronos

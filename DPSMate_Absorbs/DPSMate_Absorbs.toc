@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFAbsorbs|r
 ## Notes: Adds the absorbtion evaluation module.
 ## Author: Shino <Synced> - Kronos

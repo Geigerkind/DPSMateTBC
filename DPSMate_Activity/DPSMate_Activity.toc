@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFActivity|r
 ## Notes: Adds the activity module.
 ## Author: Shino <Synced> - Kronos

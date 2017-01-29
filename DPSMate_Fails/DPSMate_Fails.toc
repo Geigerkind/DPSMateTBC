@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFFails|r
 ## Notes: Adds the modules for the fail evaluation.
 ## Author: Shino <Synced> - Kronos

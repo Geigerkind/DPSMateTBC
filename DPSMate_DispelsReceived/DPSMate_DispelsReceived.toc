@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 20400
 ## Title: DPSMate +|cFFFFFFFFDispels received|r
 ## Notes: Adds the modules for dispels received evaluation.
 ## Author: Shino <Synced> - Kronos
