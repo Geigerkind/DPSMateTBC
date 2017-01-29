@@ -267,13 +267,10 @@ function DPSMate:TMax(t)
 end
 
 function DPSMate:TableLength(t)
-	local count = 0
 	if (t) then
-		for _ in pairs(t) do
-			count = count + 1
-		end
+		return #t
 	end
-	return count
+	return 0
 end
 
 function DPSMate:TContains(t, value)
