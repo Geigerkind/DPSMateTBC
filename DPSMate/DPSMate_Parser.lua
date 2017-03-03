@@ -158,6 +158,7 @@ DPSMate.Parser.procs = {
 	[GetSpellInfo(23721)] = true, -- Arcane Infused
 	[GetSpellInfo(6150)] = true, -- Quick Shots
 	[GetSpellInfo(3045)] = true, -- Rapid Fire
+	[GetSpellInfo(34497)] = true, -- Thrill of the Hunt
 	
 	-- Boss debuffs
 	[GetSpellInfo(19703)] = true, -- Lucifron's Curse
@@ -286,6 +287,7 @@ DPSMate.Parser.procs = {
 DPSMate.Parser.BuffExceptions = {
 	[GetSpellInfo(15494)] = true, -- Fury of Forgewright
 	[GetSpellInfo(23581)] = true, -- Bloodfang
+	[GetSpellInfo(34497)] = true, -- Thrill of the Hunt
 }
 
 DPSMate.Parser.OtherExceptions = {
