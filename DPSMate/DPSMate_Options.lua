@@ -2111,6 +2111,7 @@ function DPSMate.Options:ToggleSync()
 			_G("DPSMate_"..val["name"].."_Head_Sync"):GetNormalTexture():SetVertexColor(0.67,0.83,0.45,1)
 		end
 	end
+	DPSMate.Sync.synckey = ""
 end
 
 
