@@ -1805,7 +1805,7 @@ function DPSMate.Options:CreateWindow()
 			bgbarcolor = {1,1,1},
 			numberformat = 1,
 			opacity = 1,
-			bgopacity = 1,
+			bgopacity = 0,
 			titlebaropacity = 1,
 			filterclasses = {
 				warrior = true,
