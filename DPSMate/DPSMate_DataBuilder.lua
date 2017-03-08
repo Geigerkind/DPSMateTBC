@@ -132,11 +132,26 @@ local tinsert = table.insert
 local tremove = table.remove
 local _G = getglobal
 local player = ""
-local GT = GetTime
 local GetTime = GetTime
 local strfind = string.find
 local UL = UnitLevel
-local slower = strlower
+local strlower = strlower
+local UnitClass = UnitClass
+local GetGuildInfo = GetGuildInfo
+local GetRaidRosterInfo = GetRaidRosterInfo
+local GetRealZoneText = GetRealZoneText
+local GetNumPartyMembers = GetNumPartyMembers
+local GetNumRaidMembers = GetNumRaidMembers
+local GetGameTime = GetGameTime
+local UnitName = UnitName
+local UnitFactionGroup = UnitFactionGroup
+local UnitAffectingCombat = UnitAffectingCombat
+local UnitIsPlayer = UnitIsPlayer
+local UnitIsDead = UnitIsDead
+local UnitBuff = UnitBuff
+local UnitInRaid = UnitInRaid
+local pairs = pairs
+local floor = floor
 
 -- Begin Functions
 
@@ -461,7 +476,7 @@ function DPSMate.DB:OnEvent(event)
 			DPSMateHistory = {
 				names = {},
 				DMGDone = {},
-				DMGTaken = {},
+				DMGetTimeaken = {},
 				EDDone = {},
 				EDTaken = {},
 				THealing = {},
@@ -997,7 +1012,7 @@ function DPSMate.DB:DamageDone(Duser, Dname, Dhit, Dcrit, Dmiss, Dparry, Ddodge,
 		end
 		local path = DPSMateDamageDone[cat][DPSMateUser[Duser][1]][DPSMateAbility[Dname][1]]
 		-- Casts evaluation
-		local time = GT()
+		local time = GetTime()
 		if CastsBuffer[1][cat][Duser] then
 			if CastsBuffer[1][cat][Duser][Dname] then
 				if time>=(CastsBuffer[1][cat][Duser][Dname]+0.1) then
@@ -1098,7 +1113,7 @@ function DPSMate.DB:DamageTaken(Duser, Dname, Dhit, Dcrit, Dmiss, Dparry, Ddodge
 		local path = DPSMateDamageTaken[cat][DPSMateUser[Duser][1]][DPSMateUser[cause][1]][DPSMateAbility[Dname][1]]
 		-- Casts evaluation
 		-- No clue rly why this is not working. Commenting it out for now.
-		--local time = GT()
+		--local time = GetTime()
 		--if CastsBuffer[2][cat][Duser] then
 		--	if CastsBuffer[2][cat][Duser][Dname] then
 		--		if time>=(CastsBuffer[2][cat][Duser][Dname]+0.1) then
@@ -1219,7 +1234,7 @@ function DPSMate.DB:EnemyDamage(mode, arr, Duser, Dname, Dhit, Dcrit, Dmiss, Dpa
 		end
 		local path = arr[cat][DPSMateUser[cause][1]][DPSMateUser[Duser][1]][DPSMateAbility[Dname][1]]
 		-- Casts evaluation
-		local time = GT()
+		local time = GetTime()
 		if CastsBuffer[3][cat][Duser] then
 			if CastsBuffer[3][cat][Duser][Dname] then
 				if time>=(CastsBuffer[3][cat][Duser][Dname]+0.1) then
@@ -2162,7 +2177,7 @@ function DPSMate.DB:GetClass(name)
 		end
 	end
 	local class = UnitClass(name)
-	if class then return slower(class) end
+	if class then return strlower(class) end
 	return false
 end
 
