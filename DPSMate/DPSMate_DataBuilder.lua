@@ -111,7 +111,6 @@ local UpdateTime = 0.125
 local LastUpdate = 0
 local MainLastUpdate = 0
 local MainUpdateTime = 1.5
-local CombatBuffer = 1
 local tinsert = table.insert
 local tremove = table.remove
 local _G = getglobal
@@ -632,6 +631,9 @@ DPSMate.DB.VARIABLES_LOADED = function()
 		DPSMate.Options:RegisterEvent("RAID_ROSTER_UPDATE")
 		DPSMate.Options:RegisterEvent("PARTY_MEMBERS_CHANGED")
 
+		DPSMate.Options:SetScript("OnEvent", function() this[event]() end)
+		DPSMate.Options:SetScript("OnUpdate", function() this:OnUpdate() end)
+
 		DPSMate:SendMessage("DPSMate build "..DPSMate.VERSION.." has been loaded!")
 		this.loaded = true
 	end
@@ -776,11 +778,10 @@ function DPSMate.DB:OnGroupUpdate()
 	local pet = UnitName("pet")
 	local name = UnitName("player")
 	if pet and pet ~= DPSMate.L["unknown"] then
-		self:BuildUser(name, nil)
 		self:BuildUser(pet, nil)
 		DPSMateUser[pet][4] = true
 		DPSMateUser[name][5] = pet
-		DPSMateUser[pet][6] = DPSMateUser[name][1]
+		DPSMateUser[pet][6] = self:BuildUser(name)
 	end
 	DPSMate.Parser.TargetParty[name] = "player"
 	if num<=0 then
@@ -1064,7 +1065,7 @@ function DPSMate.DB:DamageTaken(Duser, Dname, Dhit, Dcrit, Dmiss, Dparry, Ddodge
 				["i"] = {}
 			}
 		end
-		path = DPSMateDamageTaken[cat][Duser][cause][Dname]
+		path = gen[cause][Dname]
 		if Damount > 0 then 
 			path[13] = path[13] + Damount
 			if Dhit == 1 then
@@ -1105,9 +1106,9 @@ end
 
 local ActiveMob = {}
 function DPSMate.DB:EnemyDamage(mode, arr, Duser, Dname, Dhit, Dcrit, Dmiss, Dparry, Ddodge, Dresist, Damount, cause, Dblock, Dcrush)
+	ActiveMob[cause] = true
 	Duser = self:BuildUser(Duser)
 	cause = self:BuildUser(cause)
-	ActiveMob[cause] = true
 	
 	if not mode then
 		if not DPSMateSettings["legacylogs"] and not DPSMate.RegistredModules["enemydamagedone"] then
@@ -1432,11 +1433,11 @@ function DPSMate.DB:GetAbsorbingShield(ability, abilityTarget, cate)
 		if AAS~={} or ASS~={} then
 			local unit = DPSMate.Parser:GetUnitByName(abilityTarget)
 			if unit then
+				local buff
 				for i=1, 32 do
-					local buff = UnitBuff(unit, i)
+					buff = UnitBuff(unit, i)
 					if (not buff) then break end
-					self:BuildAbility(buff, nil)
-					buff = DPSMateAbility[buff][1]
+					buff = self:BuildAbility(buff)
 					for cat, val in pairs(AAS) do
 						if val[1]==buff then
 							AbsorbingAbility = {cat, {val[1],val[2]}}
@@ -1467,7 +1468,6 @@ function DPSMate.DB:GetAbsorbingShield(ability, abilityTarget, cate)
 end
 
 function DPSMate.DB:Absorb(ability, abilityTarget, incTarget)
-	if self:BuildUser(incTarget, nil) or self:BuildUser(abilityTarget, nil) or self:BuildAbility(ability, nil) then return end
 	if not DPSMateSettings["legacylogs"] and not DPSMate.RegistredModules["absorbs"] and not DPSMate.RegistredModules["absorbstaken"] and not DPSMate.RegistredModules["healingandabsorbs"] then return end
 	incTarget = self:BuildUser(incTarget)
 	abilityTarget = self:BuildUser(abilityTarget)
@@ -1731,7 +1731,7 @@ end
 
 function DPSMate.DB:GetOptionsTrue(i,k)
 	for cat,val in pairs(DPSMateSettings["windows"][k]["options"][i]) do
-		if val == true then
+		if val then
 			return cat
 		end
 	end

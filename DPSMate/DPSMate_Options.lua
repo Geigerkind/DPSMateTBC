@@ -2120,7 +2120,6 @@ function DPSMate.Options:ToggleSync()
 			_G("DPSMate_"..val["name"].."_Head_Sync"):GetNormalTexture():SetVertexColor(0.67,0.83,0.45,1)
 		end
 	end
-	DPSMate.Sync.synckey = ""
 end
 
 local reportdelay = 0.5
@@ -2135,6 +2134,3 @@ function DPSMate.Options:OnUpdate()
 		end
 	end
 end
-
-DPSMate.Options:SetScript("OnEvent", function() this[event]() end)
-DPSMate.Options:SetScript("OnUpdate", function() this:OnUpdate() end)

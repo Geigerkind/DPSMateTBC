@@ -744,7 +744,7 @@ local function OnEvent(event)
 	end
 end
 
-local function GetUnitByName(target)
+function DPSMate.Parser:GetUnitByName(target)
 	local unit = DPSMate.Parser.TargetParty[target]
 	if not unit then
 		if target==player then
@@ -755,6 +755,7 @@ local function GetUnitByName(target)
 	end
 	return unit
 end
+local GetUnitByName = DPSMate.Parser.GetUnitByName
 local GetOverhealByName = function(amount, target)
 	local result, unit = 0, GetUnitByName(target)
 	if unit then result = amount-(UnitHealthMax(unit)-UnitHealth(unit)) end
@@ -832,7 +833,7 @@ local function SwingMissed(timestamp, eventtype, srcGUID, srcName, srcFlags, dst
 end
 
 local function SpellDamage(timestamp, eventtype, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags,spellId, spellName, spellSchool, amount, school, resisted, blocked, absorbed, critical, glancing, crushing)
-	t = {}
+	t = {false, false}
 	srcName = srcName or DPSMate.L["penvironment"]
 	if critical then t[1]=0;t[2]=1
 	elseif glancing then t[1]=0;t[5]=1
