@@ -622,9 +622,10 @@ DPSMate.DB.VARIABLES_LOADED = function()
 		this.userlen = DPSMate:TableLength(DPSMateUser)+100
 		this.abilitylen = DPSMate:TableLength(DPSMateAbility)+100
 
-		DPSMate:SetStatusBarValue()
 		DPSMate.Parser:GetPlayerValues()
 		this:OnGroupUpdate()
+		DPSMate:SetStatusBarValue()
+		this.NeedUpdate = true
 		
 		DPSMate.Sync:RegisterEvent("CHAT_MSG_ADDON")
 		DPSMate.Options:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -797,6 +798,12 @@ end
 
 function DPSMate.DB:BuildUser(Dname, Dclass)
 	if (not DPSMateUser[Dname] and Dname) then
+		if not Dclass then
+			local _, en = UnitClass(Dname)
+			if en then
+				Dclass = strlower(Dclass)
+			end
+		end
 		self.userlen = self.userlen + 1
 		DPSMateUser[Dname] = {
 			[1] = self.userlen,

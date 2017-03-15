@@ -19,6 +19,7 @@ DPSMate.DelayMsg = {}
 -- Local Variables
 local _G = getglobal
 local classcolor = {
+	[""] = {r=0.78,g=0.61,b=0.43},
 	rogue = {r=1.0, g=0.96, b=0.41},
 	priest = {r=1,g=1,b=1},
 	druid = {r=1,g=0.49,b=0.04},
@@ -523,13 +524,10 @@ end
 
 function DPSMate:GetClassColor(class)
 	if not classcolor[class] then
-		if DPSMateUser[class] then
-			if not DPSMateUser[class][2] and UnitClass(class) then
-				DPSMateUser[class][2] = strlower(UnitClass(class))
-			end
+		if class then
 			class = DPSMateUser[class][2] or "warrior"
 		else
-			return 0.78,0.61,0.43, "warrior"
+			class = "warrior"
 		end
 	end
 	return classcolor[class].r, classcolor[class].g, classcolor[class].b, class

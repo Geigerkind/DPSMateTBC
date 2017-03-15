@@ -9,6 +9,29 @@ local voteTime = 0
 local bc, am = 0, 1
 local old = 0
 
+function DPSMate.Sync:GetSummarizedTable(arr)
+	local newArr, i, dmg, time, dis = {}, 1, 0, nil, 1
+	local TL = DPSMate:TableLength(arr)
+	if TL>100 then dis = floor(TL/100) end
+	for cat, val in pairs(arr) do
+		if dis>1 then
+			dmg=dmg+val[2]
+			if time then
+				if i>dis and (val[1]-time)>0 then
+					tinsert(newArr, {(val[1]+time)/2, dmg/(val[1]-time)}) -- last time val // subtracting from each other to get the time in which the damage is being done
+					time, dmg, i = nil, 0, 1
+				end
+			else
+				time=val[1]
+			end
+		else
+			tinsert(newArr, val)
+		end
+		i=i+1
+	end
+	return newArr
+end
+
 function DPSMate.Sync:OnLoad()
 	local _, playerclass = UnitClass("player")
 	pid = DPSMate.DB:BuildUser(UnitName("player"), strlower(playerclass))
