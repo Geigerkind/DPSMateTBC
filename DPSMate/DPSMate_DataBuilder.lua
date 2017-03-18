@@ -691,7 +691,7 @@ DPSMate.DB.PLAYER_TARGET_CHANGED = function()
 		if DPSMateUser[name] then
 			DPSMateUser[name][2] = strlower(class)
 		else
-			self:BuildUser(name, strlower(class))
+			this:BuildUser(name, strlower(class))
 		end
 		if fac == DPSMate.L["alliance"] then
 			DPSMateUser[name][3] = 1
