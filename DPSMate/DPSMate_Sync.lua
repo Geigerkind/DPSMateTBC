@@ -140,7 +140,7 @@ local function ReceiveGreet(arg2, arg4)
 		am = am + 1
 	else
 		if (GetTime()-old)>=3 then
-			local ver = tnbr(arg2:match("%d+") or 0)
+			local ver = tonumber(arg2:match("%d+") or 0)
 			if ver>DPSMate.VERSION then
 				DPSMate:SendMessage(DPSMate.L["versionisold"])
 				old = GetTime()
@@ -149,7 +149,9 @@ local function ReceiveGreet(arg2, arg4)
 	end
 end
 local function OnEvent(event)
-	Exec[arg1](arg2, arg4)
+	if Exec[arg1] then
+		Exec[arg1](arg2, arg4)
+	end
 end
 
 Exec = {
