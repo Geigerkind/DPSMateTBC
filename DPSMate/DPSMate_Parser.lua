@@ -721,7 +721,7 @@ function DPSMate.Parser:GetPlayerValues()
 	self.playerclass = playerclass
 	DPSMatePlayer[1] = self.player
 	DPSMatePlayer[2] = playerclass
-	local _, fac = UnitFactionGroup("player")
+	local fac = UnitFactionGroup("player")
 	if fac == "Alliance" then
 		DPSMatePlayer[3] = 1
 	elseif fac == "Horde" then
@@ -1124,6 +1124,8 @@ Execute = {
 	["SPELL_PERIODIC_ENERGIZE"] = Energize,
 	["SPELL_EXTRA_ATTACKS"] = ExtraAttacks,
 	["CHAT_MSG_LOOT"] = Loot,
+	["PLAYER_ENTERING_WORLD"] = DPSMate.Parser.GetPlayerValues,
+	["PLAYER_LOGOUT"] = DPSMate.Parser.GetPlayerValues,
 	
 	["SPELL_SUMMON"] = Summon,
 	
@@ -1158,3 +1160,5 @@ DPSMate.Parser:SetScript("OnEvent", OnEvent)
 DPSMate.Parser:SetScript("OnUpdate", UnitDiedHackFix)
 DPSMate.Parser:RegisterEvent("CHAT_MSG_LOOT")
 DPSMate.Parser:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+DPSMate.Parser:RegisterEvent("PLAYER_ENTERING_WORLD")
+DPSMate.Parser:RegisterEvent("PLAYER_LOGOUT")
