@@ -1682,7 +1682,7 @@ function DPSMate.Options:NewSegment(segname)
 		--DPSMateThreat[2] = {}
 		DPSMateFails[2] = {}
 		DPSMateCCBreaker[2] = {}
-		DPSMateCombatTime["current"] = 1
+		DPSMateCombatTime["current"] = 0.0001
 		DPSMateCombatTime["effective"][2] = {}
 		DPSMate:SetStatusBarValue()
 	end
