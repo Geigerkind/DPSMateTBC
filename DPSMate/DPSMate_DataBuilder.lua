@@ -804,7 +804,7 @@ function DPSMate.DB:BuildUser(Dname, Dclass)
 			if not Dclass then
 				local _, en = UnitClass(Dname)
 				if en then
-					Dclass = strlower(Dclass)
+					Dclass = strlower(en)
 				end
 			end
 			self.userlen = self.userlen + 1
