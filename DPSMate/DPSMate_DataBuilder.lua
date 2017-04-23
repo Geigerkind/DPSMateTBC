@@ -1919,7 +1919,7 @@ local banedItems = {
 	[30314] = true,
 }
 function DPSMate.DB:Loot(user, quality, itemid)
-	if not DPSMateSettings["legacylogs"] and quality>3 and not banedItems[itemid] then
+	if DPSMateSettings["legacylogs"] and quality>3 and not banedItems[itemid] then
 		local zone = GetRealZoneText()
 		if not DPSMateLoot[zone] then DPSMateLoot[zone] = {} end
 		if self.Zones[zone] then -- Need to find a solution for world bosses.
