@@ -1656,12 +1656,14 @@ function DPSMate.Options:NewSegment(segname)
 			name = DPSMate:GetUserById(a) or DPSMate.L["unknown"]
 			extra = " - CBT: "..self:FormatTime(DPSMateCombatTime["current"])
 		end
-		if DPSMateSettings["onlybossfights"] then
-			if DPSMate.BabbleBoss[name] then
+		if name ~= DPSMate.L["unknown"] or (name == DPSMate.L["unknown"] and max > 100) then
+			if DPSMateSettings["onlybossfights"] then
+				if DPSMate.BabbleBoss[name] then
+					self:CreateSegment(name..extra)
+				end
+			else
 				self:CreateSegment(name..extra)
 			end
-		else
-			self:CreateSegment(name..extra)
 		end
 		
 		DPSMateDamageDone[2] = {}

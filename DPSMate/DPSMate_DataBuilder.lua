@@ -586,9 +586,27 @@ DPSMate.DB.VARIABLES_LOADED = function()
 		
 		
 		DPSMate:OnLoad()
-		DPSMate.Sync:OnLoad()
 		DPSMate.Options:InitializeSegments()
 		DPSMate.Options:InitializeHideShowWindow()
+
+		-- Fixing an Log Bug
+		if not DPSMATERESET or DPSMATERESET<DPSMate.VERSION then
+			DPSMateUser = {}
+			DPSMateAbility = {}
+			DPSMATERESET = DPSMate.VERSION
+			DPSMate.Options:PopUpAccept(true, true)
+		end
+
+		this.userlen = DPSMate:TableLength(DPSMateUser)+100
+		this.abilitylen = DPSMate:TableLength(DPSMateAbility)+100
+		if this.userlen== 0 then
+			this.userlen = 100
+		end
+		if this.abilitylen == 0 then
+			this.abilitylen = 100
+		end
+
+		DPSMate.Sync:OnLoad()
 		
 		player = UnitName("player")
 		
@@ -606,20 +624,6 @@ DPSMate.DB.VARIABLES_LOADED = function()
 				_G("DPSMate_Details"..val):SetToplevel(true)
 			end
 		end
-
-		-- Fixing an Log Bug
-		if not DPSMateUser["LASTRESETDPSMATE"] or DPSMateUser["LASTRESETDPSMATE"][2]<DPSMate.VERSION then
-			DPSMateUser = {}
-			DPSMateAbility = {}
-			DPSMateUser["LASTRESETDPSMATE"] = {
-				[1] = 1,
-				[2] = DPSMate.VERSION
-			}
-			DPSMate.Options:PopUpAccept(true, true)
-		end
-
-		this.userlen = DPSMate:TableLength(DPSMateUser)+100
-		this.abilitylen = DPSMate:TableLength(DPSMateAbility)+100
 
 		DPSMate.Parser:GetPlayerValues()
 		this:OnGroupUpdate()
