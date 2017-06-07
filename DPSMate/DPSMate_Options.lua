@@ -919,6 +919,7 @@ function DPSMate.Options:PopUpAccept(bool, bypass)
 				val["options"][2]["total"] = true
 			end
 		end
+		DPSMate.DB:DamageDone(UnitName("player"), "Init", 0, 0, 0, 0, 0, 0, 0, 0, 0)
 		DPSMate.Options:InitializeSegments()
 		DPSMate:SetStatusBarValue()
 	end
