@@ -33,8 +33,8 @@ function DPSMate.Sync:GetSummarizedTable(arr)
 end
 
 function DPSMate.Sync:OnLoad()
-	local _, playerclass = UnitClass("player")
-	pid = DPSMate.DB:BuildUser(UnitName("player"), strlower(playerclass))
+	--local _, playerclass = UnitClass("player")
+	--pid = DPSMate.DB:BuildUser(UnitName("player"), strlower(playerclass))
 end
 
 function DPSMate.Sync:Vote()

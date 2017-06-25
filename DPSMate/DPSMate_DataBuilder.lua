@@ -589,24 +589,19 @@ DPSMate.DB.VARIABLES_LOADED = function()
 		DPSMate.Options:InitializeSegments()
 		DPSMate.Options:InitializeHideShowWindow()
 
+		local reset = false
 		-- Fixing an Log Bug
 		if not DPSMATERESET or DPSMATERESET<DPSMate.VERSION then
 			DPSMateUser = {}
 			DPSMateAbility = {}
 			DPSMATERESET = DPSMate.VERSION
-			DPSMate.Options:PopUpAccept(true, true)
+			reset = true;
 		end
 
 		this.userlen = DPSMate:TableLength(DPSMateUser)+100
 		this.abilitylen = DPSMate:TableLength(DPSMateAbility)+100
-		if this.userlen== 0 then
-			this.userlen = 100
-		end
-		if this.abilitylen == 0 then
-			this.abilitylen = 100
-		end
 
-		DPSMate.Sync:OnLoad()
+		--DPSMate.Sync:OnLoad()
 
 		player = UnitName("player")
 		
@@ -637,6 +632,13 @@ DPSMate.DB.VARIABLES_LOADED = function()
 
 		DPSMate.Options:SetScript("OnEvent", function() this[event]() end)
 		DPSMate.Options:SetScript("OnUpdate", function() this:OnUpdate() end)
+
+		local _, playerclass = UnitClass("player")
+		DPSMateUser[player][2] = strlower(playerclass)
+
+		if reset then
+			DPSMate.Options:PopUpAccept(true, true)
+		end
 
 		DPSMate:SendMessage("DPSMate build "..DPSMate.VERSION.." has been loaded!")
 		this.loaded = true
@@ -1818,6 +1820,8 @@ function DPSMate.DB:OnUpdate()
 			end
 			ActiveMob = {}
 			LastUpdate = 0
+			
+			CombatLogClearEntries(); -- Lets see how big of an impact that is
 		end
 		
 		if notInCombat then 
