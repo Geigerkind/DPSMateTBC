@@ -1,6 +1,6 @@
 -- Global Variables
 DPSMate = {}
-DPSMate.VERSION = 52
+DPSMate.VERSION = 53
 DPSMate.Parser = CreateFrame("Frame", nil, UIParent)
 DPSMate.L = {}
 DPSMate.DB = CreateFrame("Frame", nil, UIParent)
