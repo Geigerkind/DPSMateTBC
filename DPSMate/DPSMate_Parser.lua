@@ -1031,7 +1031,14 @@ local function SpellCastStart(timestamp, eventtype, srcGUID, srcName, srcFlags, 
 	end
 end
 
+local validGuardians = {
+	[GetSpellInfo(31687)] = "Water Elemental",
+}
+
 local function SpellCastSuccess(timestamp, eventtype, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags,spellId, spellName, spellSchool)
+	if validGuardians[spellName] then
+		DB:AddPotentialGuardianForOwner(validGuardians[spellName], srcGUID, srcName)
+	end
 	if eventtype=="SPELL_INSTAKILL"then
 		DB:UnregisterDeath(dstName)
 		return

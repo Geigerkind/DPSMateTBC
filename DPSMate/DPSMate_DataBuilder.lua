@@ -748,7 +748,7 @@ function DPSMate.DB:OnGroupUpdate()
 				DPSMateUser[name][2] = strlower(classEng)
 			end
 			DPSMateUser[name][4] = false
-			if pet and pet ~= DPSMate.L["unknown"] then
+			if pet and pet ~= DPSMate.L["unknown"] and pet ~= "" then
 				DPSMateUser[pet][4] = true
 				DPSMateUser[name][5] = pet
 				DPSMateUser[pet][6] = DPSMateUser[name][1]
@@ -784,7 +784,7 @@ function DPSMate.DB:OnGroupUpdate()
 	end
 	local pet = UnitName("pet")
 	local name = UnitName("player")
-	if pet and pet ~= DPSMate.L["unknown"] then
+	if pet and pet ~= DPSMate.L["unknown"] and pet ~= "" then
 		self:BuildUser(pet, nil)
 		DPSMateUser[pet][4] = true
 		DPSMateUser[name][5] = pet
@@ -2106,11 +2106,14 @@ local validGuardians = {
 	[GetSpellInfo(25567)] = true, -- Healing Stream Totem
 	[GetSpellInfo(2894)] = true, -- Greater Fire Elemental Totem
 	[GetSpellInfo(2062)] = true, -- Greater Earth Elemental Totem
+	[GetSpellInfo(31687)] = true,
+	["Water Elemental"] = true,
 }
 
 local TranslateElementalGuardians = {
 	[DPSMate.L["fireelemental"]] = GetSpellInfo(2894),
 	[DPSMate.L["earthelemental"]] = GetSpellInfo(2062),
+	["Water Elemental"] = "Water Elemental"
 }
 
 local forceofnature = GetSpellInfo(33831)
