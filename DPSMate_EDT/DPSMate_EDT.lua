@@ -50,6 +50,7 @@ function DPSMate.Modules.EDT:EvalTable(user, k)
 	local arr = DPSMate:GetMode(k)
 	if arr[user[1]] then
 		for cat, val in pairs(arr[user[1]]) do
+			local userArr = DPSMateUser[DPSMate:GetUserById(cat)]
 			local ta, tb = {}, {}
 			for ca, va in pairs(val) do
 				if ca~="i" then
@@ -70,22 +71,45 @@ function DPSMate.Modules.EDT:EvalTable(user, k)
 					end
 				end
 			end
-			local i = 1
-			while true do
-				if (not d[i]) then
-					tinsert(a, i, cat)
-					tinsert(d, i, {val["i"], ta, tb})
-					break
-				else
-					if (d[i][1] < val["i"]) then
+			if DPSMateSettings["mergepets"] and userArr[5] and userArr[5]~="" and DPSMateUser[userArr[5]] and arr[user[1]][DPSMateUser[userArr[5]][1]] then
+				for ca, va in pairs(arr[user[1]][DPSMateUser[userArr[5]][1]]) do
+					if ca~="i" then
+						local i = 1
+						while true do
+							if (not tb[i]) then
+								tinsert(ta, i, ca)
+								tinsert(tb, i, va[13])
+								break
+							else
+								if (tb[i] < va[13]) then
+									tinsert(ta, i, ca)
+									tinsert(tb, i, va[13])
+									break
+								end
+							end
+							i = i + 1
+						end
+					end
+				end
+			end
+			if not DPSMateSettings["mergepets"] or not userArr[4] then
+				local i = 1
+				while true do
+					if (not d[i]) then
 						tinsert(a, i, cat)
 						tinsert(d, i, {val["i"], ta, tb})
 						break
+					else
+						if (d[i][1] < val["i"]) then
+							tinsert(a, i, cat)
+							tinsert(d, i, {val["i"], ta, tb})
+							break
+						end
 					end
+					i = i + 1
 				end
-				i = i + 1
+				total=total+val["i"]
 			end
-			total=total+val["i"]
 		end
 	end
 	return a, total, d

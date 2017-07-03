@@ -537,6 +537,9 @@ function DPSMate:GetClassColor(class)
 			class = "warrior"
 		end
 	end
+	if class == "" then
+		class = "warrior"
+	end
 	return classcolor[class].r, classcolor[class].g, classcolor[class].b, class
 end
 
